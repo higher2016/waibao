@@ -4,10 +4,14 @@ import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javafx.embed.swing.JFXPanel;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
-import javafx.embed.swing.JFXPanel;
+import main.StartGame;
 import scene.AllUnitInGame.SingleUnit;
 import scene.position.Position;
 import unit.ReadGameModelUnit;
@@ -20,6 +24,7 @@ public class Game extends MouseAdapter {
 
 	private JFrame gameWindow = new JFrame();
 	private JFXPanel jfxPanel = new JFXPanel();
+	private JTextArea useTime = new JTextArea();
 
 	private long hadUseTime;
 
@@ -34,6 +39,7 @@ public class Game extends MouseAdapter {
 		for (SingleUnit unit : allUnitInGame.getAllSingleUnit()) {
 			jfxPanel.add(unit.button);
 		}
+		useTime = new JTextArea();
 
 		gameWindow.setContentPane(jfxPanel);
 		gameWindow.pack();
@@ -58,30 +64,44 @@ public class Game extends MouseAdapter {
 	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		SingleUnit singleUnit = allUnitInGame.getSingleUnit((JButton) e.getSource());
 		if (SwingUtilities.isRightMouseButton(e)) {
-			System.out.println("s");
-			move(e);
-		} else if (SwingUtilities.isLeftMouseButton(e)) {
-			System.out.println("s");
-			if (pickPlankLength == null) {
-				// pickUpPlank();
+			if (pickPlankLength == null || pickPlankLength == 0) {
+				pickUpPlank(singleUnit.position);
 			} else {
-				// putDownPlank();
+				putDownPlank(singleUnit.position);
 			}
+		} else if (SwingUtilities.isLeftMouseButton(e) && isCanMove(singleUnit)) {
+			move(singleUnit);
 		}
+
+		if (isWin()) {
+			win();
+		}
+	}
+
+	private void win() {
+		gameWindow.dispose();
+		new CongratulationScene("Level2", false, 10);
+		StartGame.player.endGame();
 	}
 
 	/**
 	 * 移动
 	 */
-	private void move(MouseEvent e) {
-		if (isCanMove(new Position(0, 0))) {
-			return;
-		}
+	private void move(SingleUnit singleUnit) {
+
 	}
 
-	private boolean isCanMove(Position nextPosition) {
-		return false;
+	private boolean isCanMove(SingleUnit singleUnit) {
+		if (singleUnit.imageName.startsWith("bank") || singleUnit.imageName.startsWith("water")) {
+			return false;
+		}
+		if (singleUnit.position.isSamePosition(nowPosition)) {
+			return false;
+		}
+
+		return true;
 	}
 
 	private void putDownPlank(Position clickPosition) {

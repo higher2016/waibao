@@ -42,6 +42,17 @@ public class AllUnitInGame {
 		return allUnitInGameLevel;
 	}
 
+	public SingleUnit getSingleUnit(JButton button) {
+		for (SingleUnit[] units : allUnits) {
+			for (SingleUnit unit : units) {
+				if (button == unit.button) {
+					return unit;
+				}
+			}
+		}
+		return null;
+	}
+
 	private static void initButton(AllUnitInGame allUnitInGameLevel, String[] singleUnitStrs) {
 		for (int i = 2; i < singleUnitStrs.length; i++) {
 			String[] singleUnitStrss = singleUnitStrs[i].split("#");
@@ -53,7 +64,7 @@ public class AllUnitInGame {
 				JButton button = new JButton();
 				button.setIcon(icon);
 				button.setBorderPainted(false);
-				SingleUnit singleUnit = new SingleUnit(position, button);
+				SingleUnit singleUnit = new SingleUnit(position, button, sins[2]);
 				allUnitInGameLevel.allUnits[position.y][position.x] = singleUnit;
 			}
 		}
@@ -72,10 +83,12 @@ public class AllUnitInGame {
 	public static final class SingleUnit {
 		public final Position position;
 		public final JButton button;
+		public String imageName;
 
-		public SingleUnit(Position position, JButton button) {
+		public SingleUnit(Position position, JButton button, String imageName) {
 			this.position = position;
 			this.button = button;
+			this.imageName = imageName;
 		}
 
 		public void setNewImageIcon(String newIamgeIconName) {
@@ -90,5 +103,14 @@ public class AllUnitInGame {
 		public boolean isSamePosition(SingleUnit singleUnit) {
 			return this.position.isSamePosition(singleUnit.position);
 		}
+
+		public String getImageName() {
+			return imageName;
+		}
+
+		public void setImageName(String imageName) {
+			this.imageName = imageName;
+		}
+
 	}
 }

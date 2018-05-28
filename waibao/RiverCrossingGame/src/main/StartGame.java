@@ -17,6 +17,7 @@ public class StartGame {
 	private JFrame startPage = new JFrame();
 
 	public static Player player;
+	public static MainScene mainScene;
 
 	private void initStartPage() {
 		startPage.setSize(600, 300);
@@ -34,7 +35,7 @@ public class StartGame {
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				player = new Player(playerName.getText());
-				new MainScene();
+				mainScene = new MainScene();
 				startPage.dispose();
 			}
 		});
