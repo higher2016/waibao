@@ -25,7 +25,7 @@ public class MainScene extends JFrame {
 	private JPanel bottom = new JPanel();
 	private ScorePlan scorePlan;
 	private Introduce introduce;
-	
+
 	public MainScene() {
 		addIntroductionButton();
 		addStarGame();
@@ -100,6 +100,14 @@ public class MainScene extends JFrame {
 				StartGame.player.startGame();
 			}
 		});
+	}
+
+	public ScorePlan getScorePlan() {
+		return scorePlan;
+	}
+
+	public void setScorePlan(ScorePlan scorePlan) {
+		this.scorePlan = scorePlan;
 	}
 
 	public static void main(String[] args) {

@@ -93,6 +93,7 @@ public class AllUnitInGame {
 
 		public void setNewImageIcon(String newIamgeIconName) {
 			ImageIcon icon = AllImages.getImageIconBuyName(newIamgeIconName);
+			imageName = newIamgeIconName;
 			button.setIcon(icon);
 		}
 
@@ -107,10 +108,5 @@ public class AllUnitInGame {
 		public String getImageName() {
 			return imageName;
 		}
-
-		public void setImageName(String imageName) {
-			this.imageName = imageName;
-		}
-
 	}
 }

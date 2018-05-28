@@ -1,3 +1,10 @@
-HigherLi, 1, 12s
-HigherLi, 1, 15s
-HigherLi, 1, 17s
+HigherLi, Level2, 12
+HigherLi, Level2, 15
+HigherLi, Level2, 17
+HigherLi, Level3, 12
+HigherLi, Level3, 15
+HigherLi, Level3, 17
+HigherLi, Level1, 12
+as, Level1, 12
+HigherLi, Level1, 15
+HigherLi, Level1, 17

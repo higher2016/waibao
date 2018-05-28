@@ -8,6 +8,7 @@ public class Player {
 	private Long endTime;
 	private boolean isStartGame;
 	private Game game;
+	private String thisGameLevel;
 	private String nextGameLevel;
 
 	public void startGame() {
@@ -56,6 +57,22 @@ public class Player {
 
 	public String getPlayerName() {
 		return playerName;
+	}
+
+	public String getThisGameLevel() {
+		return thisGameLevel;
+	}
+
+	public void setThisGameLevel(String thisGameLevel) {
+		this.thisGameLevel = thisGameLevel;
+	}
+
+	public String getNextGameLevel() {
+		return nextGameLevel;
+	}
+
+	public void setNextGameLevel(String nextGameLevel) {
+		this.nextGameLevel = nextGameLevel;
 	}
 
 }
