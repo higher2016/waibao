@@ -7,10 +7,18 @@ import java.util.Map;
 
 import javax.swing.ImageIcon;
 
+/**
+ * 本类管理所有游戏要用到的图片（加载目录为./images/.）
+ */
 public class AllImages {
+	// key表示图片的名字（不带后缀——.jpg）
 	private static Map<String, ImageIcon> allImageIcons = new HashMap<>();
+	// 图片所在目录
 	private static final String pictureURL = System.getProperty("user.dir") + File.separator + "images";
 
+	/**
+	 * 从指定目录加载游戏所有要用到的图片进内存中
+	 */
 	static {
 		File file = new File(pictureURL);
 		for (File file2 : file.listFiles()) {
@@ -27,11 +35,10 @@ public class AllImages {
 		}
 	}
 
+	/**
+	 * 根据图片名字，获取图片对象
+	 */
 	public static ImageIcon getImageIconBuyName(String name) {
 		return allImageIcons.get(name);
-	}
-
-	public static void main(String[] args) {
-		System.out.println(allImageIcons);
 	}
 }

@@ -23,18 +23,23 @@ public class CongratulationScene {
 	private JFrame jframe = new JFrame();
 
 	public CongratulationScene(String passLevelName, boolean isHigherLevel, double gameUseTime) {
-		jframe.setTitle("Congratulation " + StartGame.player.getPlayerName() + " pass level —— " + passLevelName);
 		if (!isHigherLevel) {
+			jframe.setTitle("Congratulation " + StartGame.player.getPlayerName() + " pass level —— " + passLevelName);
 			initNextGameButton();
+			bottom2.add(nextGameButton);
+		} else {
+			jframe.setTitle("Congratulation " + StartGame.player.getPlayerName() + " pass level —— " + passLevelName + ". You finish the game.");
 		}
 		initBackToHomePage();
 
 		JLabel congratulation = new JLabel();
-		congratulation.setText("Congratulation " + StartGame.player.getPlayerName() + " pass level —— " + passLevelName);
+		if(isHigherLevel){
+			congratulation.setText("Congratulation " + StartGame.player.getPlayerName() + " pass level —— " + passLevelName+", You pass the Game!!!");
+		}else{
+			congratulation.setText("Congratulation " + StartGame.player.getPlayerName() + " pass level —— " + passLevelName);
+		}
 		congratulation.setFont(new Font("Arial", Font.ITALIC, 18));
 		bottom.add(congratulation);
-
-		bottom2.add(nextGameButton);
 		bottom2.add(backToHomePage);
 
 		jframe.add(bottom, BorderLayout.NORTH);

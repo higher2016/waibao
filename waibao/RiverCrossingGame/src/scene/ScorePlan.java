@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.JFrame;
+import javax.swing.JTable;
 
 import scene.position.AllSceneInitPosition;
 import scene.position.AllSceneSize;
@@ -27,7 +28,30 @@ public class ScorePlan extends JFrame {
 		parseScoreStr();
 		this.setTitle("Score list");
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setVisible(true);
+		List<PlayScore> s = new ArrayList<PlayScore>();
+		int lineNum = 0;
+		for (Map.Entry<String, List<PlayScore>> entry : scoreMap.entrySet()) {
+			s.addAll(entry.getValue());
+			lineNum += entry.getValue().size();
+		}
+		lineNum += scoreMap.size() * 3;
+		JTable jTable = new JTable(lineNum, 1);
+		jTable.setRowHeight(14);
+		jTable.setPreferredSize(new java.awt.Dimension(500, 400));
+		jTable.setValueAt("               SCORE BOARD", 0, 0);
+		int i = 0;
+		for (Map.Entry<String, List<PlayScore>> entry : scoreMap.entrySet()) {
+			int x = 1;
+			for (PlayScore playScore : entry.getValue()) {
+				jTable.setValueAt("The Rank: " + x + "th : " + playScore.string(), i, 0);
+				x++;
+				i++;
+			}
+			jTable.setValueAt("", i, 0);
+			jTable.setValueAt("", i, 0);
+			jTable.setValueAt("", i, 0);
+		}
+		add(jTable);
 	}
 
 	private void parseScoreStr() {
@@ -46,6 +70,10 @@ public class ScorePlan extends JFrame {
 
 	public void addPlayScore(PlayScore playScore) {
 		List<PlayScore> targetScoreList = scoreMap.get(playScore.levelName);
+		if (targetScoreList == null) {
+			targetScoreList = new ArrayList<PlayScore>();
+			scoreMap.put(playScore.levelName, targetScoreList);
+		}
 		boolean isAdd = false;
 		for (int i = 0; i < targetScoreList.size(); i++) {
 			if (targetScoreList.get(i).useSecond > playScore.useSecond) {
@@ -95,6 +123,10 @@ public class ScorePlan extends JFrame {
 		}
 
 		public PlayScore() {
+		}
+
+		public String string() {
+			return "player name=" + playName + ", level=" + levelName + ", use time=" + useSecond + "s";
 		}
 
 		@Override

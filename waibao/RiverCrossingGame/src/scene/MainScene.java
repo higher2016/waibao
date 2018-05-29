@@ -23,8 +23,8 @@ public class MainScene extends JFrame {
 	private static final String BUTTONS_NAME_INTRODUCTION = "How to play";
 
 	private JPanel bottom = new JPanel();
-	private ScorePlan scorePlan;
-	private Introduce introduce;
+	private ScorePlan scorePlan;// 分数面板 
+	private Introduce introduce;// 游戏介绍面板
 
 	public MainScene() {
 		addIntroductionButton();
@@ -49,7 +49,7 @@ public class MainScene extends JFrame {
 	}
 
 	/**
-	 * 添加“游戏介绍”按钮
+	 * 添加“游戏介绍”按钮，点击弹出游戏介绍页面
 	 */
 	private void addIntroductionButton() {
 		JButton introduction = new JButton(BUTTONS_NAME_INTRODUCTION);
@@ -66,22 +66,23 @@ public class MainScene extends JFrame {
 	}
 
 	/**
-	 * 添加“分数排行榜”按钮
+	 * 添加“分数排行榜”按钮，点击弹出玩家分数排行榜
 	 */
 	private void addScoreButton() {
 		JButton score = new JButton(BUTTONS_NAME_SCORE);
 		bottom.add(score);
+		scorePlan = new ScorePlan();
 		score.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (scorePlan == null) {
-					scorePlan = new ScorePlan();
-				} else {
-					scorePlan.setVisible(true);
-				}
+				scorePlan = new ScorePlan();
+				scorePlan.setVisible(true);
 			}
 		});
 	}
 
+	/**
+	 * 添加退出游戏按钮
+	 */
 	private void addExitButton() {
 		JButton exit = new JButton("Exit");
 		bottom.add(exit);
@@ -92,6 +93,9 @@ public class MainScene extends JFrame {
 		});
 	}
 
+	/**
+	 * 开始游戏按钮
+	 */
 	private void addStarGame() {
 		JButton startGame = new JButton(BUTTONS_START_GAME);
 		bottom.add(startGame);
@@ -108,9 +112,5 @@ public class MainScene extends JFrame {
 
 	public void setScorePlan(ScorePlan scorePlan) {
 		this.scorePlan = scorePlan;
-	}
-
-	public static void main(String[] args) {
-		new MainScene();
 	}
 }
